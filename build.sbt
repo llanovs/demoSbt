@@ -5,12 +5,15 @@ ThisBuild / version          := "0.1.0-SNAPSHOT"
 ThisBuild / organization     := "com.example"
 ThisBuild / organizationName := "example"
 
+//headers settings/tasks, etc
 lazy val dependenciesDiff = taskKey[Classpath]("dependencies diff between Compile and Test scope")
+lazy val mySetting = settingKey[String]("My setting")
 
 lazy val root = (project in file("."))
   .settings(
     name := "playground",
     libraryDependencies += scalaTest % Test,
+    //task algorithm
     dependenciesDiff := Def.task{
       val testJar = (Test/fullClasspathAsJars).value
       val compileJar = (fullClasspathAsJars in Compile).value
